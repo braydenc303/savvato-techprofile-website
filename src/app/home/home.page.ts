@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { UserService } from '../_services/user.service'
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -8,16 +10,22 @@ import { Router } from '@angular/router';
 })
 export class HomePage {
 
-  constructor(private _router : Router) {
+  constructor(private _router : Router,
+              private _userService: UserService) {
 
   }
 
-  onChangeYourInfoBtnTap($event) {
-  	this._router.navigate(['/edit-user-info'])
+  getUserName() {
+    let user = this._userService.getCurrentUser()
+    return user && user['name'];
   }
 
-  onShowYourProfileBtnTap($event) {
-	this._router.navigate(['/profile'])
+  onShowCareerPathBtnTap($event) {
+    this._router.navigate(['/career-goal'])
+  }
+
+  onShowSkillsMatrixBtnTap($event) {
+    this._router.navigate(['/skills-matrix'])
   }
 
 }
